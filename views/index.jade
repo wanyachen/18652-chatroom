@@ -3,3 +3,23 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  body(id="main")
+    h2 Login Form
+    form(name="lform", method="post")
+      div(class="container")
+        label
+          strong Username
+        input(type="text", placeholder="Enter Username", name="uname", required)
+        button(type="submit")
+          | Login
+
+//    <div class="container">
+//    <label><b>Username</b></label>
+//    <input type="text" placeholder="Enter Username" name="uname" required>
+//
+//    <label><b>Password</b></label>
+//    <input type="password" placeholder="Enter Password" name="psw" required>
+//        
+//    <button type="submit">Login</button>
+//    <input type="checkbox" checked="checked"> Remember me
+//  </div>
