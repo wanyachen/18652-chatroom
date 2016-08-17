@@ -4,9 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');	//manage login session
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var chatroom = require('./routes/chatroom');	//customized route
+var logout = require('./routes/logout');	//customized route
+
+// Database support:
+// store messages
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/chatroom');
 
 var app = express();
 
@@ -22,8 +31,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// important!
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+//router
 app.use('/', routes);
+app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
 app.use('/users', users);
+app.use('/chatroom', chatroom);	//chatroom page
+app.use('/logout', logout);	//exit link
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
