@@ -1,4 +1,5 @@
 //public and global javascript file
+var curUser = {};	//global
 
 $(document).ready(function() {
 	var bodyid = $('body').attr('id');
@@ -6,6 +7,20 @@ $(document).ready(function() {
 	if (bodyid == 'main') {
 		//login button callback
 		$('.container button').on('click', userLogin);
+	} else if (bodyid == "chat") {
+		//chatroom page
+		var user = curUser.username;
+		console.log('in chatroom page, username = ' + curUser.username);	//for debug
+		$('#name-area').text(user);
+		//$('#name-area').html('You are: <span>' + user + '</span>');
+		//$('#name-area').html('You are: <span>trying</span>');
+
+		//button callback
+    		$('#sendBtn input').on('click', uploadPost);
+    		$('#logout').click(function() {
+		    console.log('logout link is clicked');
+		    window.location.href = '/';	//relative ?
+		});
 	}
 });
 
@@ -13,7 +28,8 @@ $(document).ready(function() {
 function userLogin(event) {
 	event.preventDefault();
 
-	var curUser = {
+	//var curUser = {
+	curUser = {
 		'username' : $('.container input').val()
 	}
 

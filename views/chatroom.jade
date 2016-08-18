@@ -1,0 +1,70 @@
+doctype
+html( lang="en" )
+    head
+        title FSE Chatroom
+        meta( charset='utf-8' )
+        meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+        meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+        meta( name='description', content='FSE Chatroom' )
+        //- Bootswatch Theme
+        link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
+ 
+    body
+        .container-fluid
+          .row
+            .col-md-4
+              .panel.panel-default
+                .panel-heading User TimeStamp
+                .panel-body This is a post.
+            .col-md-4
+            .col-md-4
+          .row
+            div(class="footer navbar-fixed-bottom")
+              .col-md-4
+                textarea(class="form-control", rows="5", id="comment")
+                  | Typing ur comment:
+              .col-md-1
+                a.btn.btn-default(id="postbtn") Send
+              .col-md-1
+              .col-md-2
+              .col-md-2
+              .col-md-2
+ 
+        script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
+        script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+
+//            .col-md-8
+//              h3(class="text-left")
+//                | UserName
+//              p Content of Post
+//            .col-md-4
+//              h3(class="text-right")
+//                | TimeStamp
+//              p Typing the text here.
+//<textarea class="form-control" rows="5" id="comment"></textarea>
+//              btn.btn-primary.btn-block Send
+//extends layout
+//extends _bootstrap
+//append styles
+//  link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+//  link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
+//
+//block body
+//  .container-fluid
+//
+
+//extends layout
+//
+//block content
+//  h1 Chat
+//  body(id="chat")
+//    div#pagewrap
+//      h2 jQuery/Node js Chat
+//      p(id="name-area")
+//      div#chatwrap
+//        div#chatarea
+//      form(id="send-message-area")
+//        p Your message:
+//        textarea(id="sendie", maxlength='100')
+//
+
