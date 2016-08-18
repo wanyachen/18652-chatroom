@@ -1,6 +1,22 @@
 //public and global javascript file
 var curUser = {};	//global
 
+var socket = io();
+/*
+//define functions socket.emit sending to server (app.js) and socket.on receiving 
+// 'new message' is for the id of the socket and $('#new-message') is for the button
+function sendFunction(data) {
+     socket.emit('new message', data);
+}
+// 'chat message' is for the id of the socket and $('#new-area') is for the text area
+socket.on('chat message', function(msg){
+     //$('#messages-area').append($('<li>').text(msg));
+     console.log('client socket get ACK');
+     //receive broadcast, renderPost
+     renderPost(msg.username, msg.timestamp, msg.content);	//update content here
+});
+*/
+
 $(document).ready(function() {
 //	var bodyid = $('body').attr('id');
 
@@ -91,8 +107,6 @@ function uploadPost() {
 
     //for debug
     console.log('uploadPost is triggered...');
-
-//        url: '/chatroom/upload',
     //get username from server ??
     $.ajax({
         type: 'POST',
@@ -107,7 +121,8 @@ function uploadPost() {
 	success: function(response) {
 		//console.log("user = " + response.user + ", newUser.username = " + newUser.username);	
 		console.log("user = " + response.user);	
-    		renderPost(response.user, /*tim,*/formatted, text);	//update content here
+//    		renderPost(response.user, /*tim,*/formatted, text);	//update content here
+		//delay post, until receive broadcast socket
 	},
     });
  

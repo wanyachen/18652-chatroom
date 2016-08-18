@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');	//manage login session
+var socket_io = require('socket.io');	//socket
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -18,6 +19,10 @@ var monk = require('monk');
 var db = monk('localhost:27017/chatroom');
 
 var app = express();
+//socket +++
+var io = socket_io();
+app.io = io;
+//socket ---
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +42,7 @@ app.use(function(req,res,next){
     req.db = db;
     next();
 });
+
 //router
 app.use('/', routes);
 app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
@@ -74,6 +80,29 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+//socket +++
+io.on('connection', function(socket) {
+	console.log('A chatroom user connected');
+	socket.on('disconnect', function() {
+		console.log('user connect');
+	});
+	socket.on('disconnect', function() {
+		console.log('user disconnected');
+	});
+	
+//	socket.on('chat message', function(msg) {
+//		console.log('message: ' + msg);
+//		io.emit('chat message', msg);	//broadcast
+//	});
+//
+//	//for debug
+//	socket.on('error', function (err) {
+//		if (err.description) throw err.description;
+//		else throw err;
+//	});
+});
+//socket ---
 
 
 module.exports = app;
