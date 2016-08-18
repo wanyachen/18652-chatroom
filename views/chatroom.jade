@@ -14,7 +14,9 @@ html( lang="en" )
           .row
             .col-md-4
               .panel.panel-default
-                .panel-heading User TimeStamp
+                .panel-heading
+                  p User
+                  p Time
                 .panel-body This is a post.
             .col-md-4
             .col-md-4
@@ -24,13 +26,19 @@ html( lang="en" )
                 textarea(class="form-control", rows="5", id="comment")
                   | Typing ur comment:
               .col-md-1
-                a.btn.btn-default(id="postbtn") Send
+                a.btn.btn-default(id="postbtn", href="javascript: uploadPost();") Send
               .col-md-1
               .col-md-2
               .col-md-2
               .col-md-2
  
         script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
+        link( rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" )
+        script( src="https://code.jquery.com/jquery-1.12.4.js")
+        script( src="https://code.jquery.com/ui/1.12.0/jquery-ui.js")
+        script( src='/javascripts/jquery-ui-timepicker-addon.js')
+        script( src='/javascripts/global.js')
+        link( rel='stylesheet', href='/stylesheets/jquery-ui-timepicker-addon.css')
         script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
 
 //            .col-md-8
