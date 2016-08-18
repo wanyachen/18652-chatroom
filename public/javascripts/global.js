@@ -59,9 +59,10 @@ function uploadPost() {
     //2. update article in page.jade
 
     var text = $('#comment').val();
-    //var tim = Date();
+    var tim = new Date();
+    var formatted = formatDate(tim);
 
-    var formatted = $.datepicker.formatDate("M d, yy", new Date());
+    //var formatted = $.datepicker.formatDate("M d, yy", new Date());
 
     //upload to server
     // If it is, compile all user info into one object
@@ -131,3 +132,13 @@ function renderPost(username, timestamp, content) {
 
 }
 
+function formatDate(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return date.getMonth()+1 + "." + date.getDate() + "." + date.getFullYear() + "  " + strTime;
+}
