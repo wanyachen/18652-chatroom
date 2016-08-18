@@ -1,17 +1,53 @@
-extends layout
+doctype
+html( lang="en" )
+  head
+    meta( charset='utf-8' )
+    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    meta( name='description', content='' )
+    meta( name='author', content='' )
+
+    title FSE Login
+
+    link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css", rel="stylesheet")
 
 block content
-  h1= title
-  p Welcome to #{title}
   body(id="main")
-    h2 Login Form
-    form(name="lform", method="post")
-      div(class="container")
-        label
-          strong Username
-        input(type="text", placeholder="Enter Username", name="uname", required)
-        button(type="submit")
-          | Login
+    .container-fluid
+      .row
+        div(class="container")
+          .col-md-4
+            form(class="form-signin")
+              .form-group
+                h2(class="form-signin-heading")
+                  | Please sign in
+                label(for="inputName", class="sr-only")
+                  | Username
+                input(type="text", id="uname", class="form-control", placeholder="Enter Username")
+                label
+                label
+                button(class="btn btn-lg btn-default btn-block", type="submit")
+                  | Sign in
+          .col-md-4
+          .col-md-4
+
+    script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
+    script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+    script( src='/javascripts/global.js')
+
+//extends layout
+//block content
+//  h1= title
+//  p Welcome to #{title}
+//  body(id="main")
+//    h2 Login Form
+//    form(name="lform", method="post")
+//      div(class="container")
+//        label
+//          strong Username
+//        input(type="text", placeholder="Enter Username", name="uname", required)
+//        button(type="submit")
+//          | Login
 
 //    <div class="container">
 //    <label><b>Username</b></label>
