@@ -2,7 +2,7 @@
 var curUser = {};	//global
 
 var socket = io();
-/*
+
 //define functions socket.emit sending to server (app.js) and socket.on receiving 
 // 'new message' is for the id of the socket and $('#new-message') is for the button
 function sendFunction(data) {
@@ -15,7 +15,7 @@ socket.on('chat message', function(msg){
      //receive broadcast, renderPost
      renderPost(msg.username, msg.timestamp, msg.content);	//update content here
 });
-*/
+
 
 $(document).ready(function() {
 //	var bodyid = $('body').attr('id');
@@ -107,6 +107,10 @@ function uploadPost() {
 
     //for debug
     console.log('uploadPost is triggered...');
+
+    //socket
+    sendFunction(newPost);
+
     //get username from server ??
     $.ajax({
         type: 'POST',

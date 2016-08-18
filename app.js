@@ -9,7 +9,6 @@ var socket_io = require('socket.io');	//socket
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-//var chatroom = require('./routes/chatroom');	//customized route	//commented
 var logout = require('./routes/logout');	//customized route
 
 // Database support:
@@ -47,7 +46,14 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
 app.use('/users', users);
-//app.use('/chatroom', chatroom);	//chatroom page	//commented
+//socket +++
+var chatroom = require('./routes/chatroom')(io);
+app.param('parent_io', function(req, res, next, io) {
+  console.log("@bug param", io);
+  next();
+});
+app.use('/chatroom', chatroom);	//chatroom page
+//socket ---
 app.use('/logout', logout);	//exit link
 
 // catch 404 and forward to error handler
@@ -84,7 +90,7 @@ app.use(function(err, req, res, next) {
 //socket +++
 io.on('connection', function(socket) {
 	console.log('A chatroom user connected');
-	socket.on('disconnect', function() {
+	socket.on('connect', function() {
 		console.log('user connect');
 	});
 	socket.on('disconnect', function() {
