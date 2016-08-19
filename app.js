@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');	//manage login session
 var socket_io = require('socket.io');	//socket
 
-var routes = require('./routes/index');
+//var routes = require('./routes/index');	//socket
 var users = require('./routes/users');
 var logout = require('./routes/logout');	//customized route
 
@@ -42,18 +42,26 @@ app.use(function(req,res,next){
     next();
 });
 
-//router
-app.use('/', routes);
+//routers
 app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
-app.use('/users', users);
 //socket +++
-var chatroom = require('./routes/chatroom')(io);
+var routes = require('./routes/index')(io);
 app.param('parent_io', function(req, res, next, io) {
   console.log("@bug param", io);
   next();
 });
-app.use('/chatroom', chatroom);	//chatroom page
+app.use('/', routes);
 //socket ---
+app.use('/users', users);
+
+////socket +++
+//var chatroom = require('./routes/chatroom')(io);
+//app.param('parent_io', function(req, res, next, io) {
+//  console.log("@bug param", io);
+//  next();
+//});
+//app.use('/chatroom', chatroom);	//chatroom page
+////socket ---
 app.use('/logout', logout);	//exit link
 
 // catch 404 and forward to error handler

@@ -18,7 +18,7 @@ block content
       .row
         div(class="container")
           .col-md-4
-            form(class="form-signin")
+            form(class="form-signin", action="", onsubmit="javascript:userLogin();return false;")
               .form-group
                 h2(class="form-signin-heading")
                   | Please sign in
@@ -36,7 +36,7 @@ block content
       div(class="modal-dialog modal-lg")
         div(class="modal-content")
           div(class="modal-header")
-            button(id = "logout", type="button", class="close", data-dismiss="modal", aria-label="Close")&times;
+            button(id = "logout", type="button", class="close", data-dismiss="modal", aria-label="Close") &times;
           div(class="modal-body")
             div#msg
           div(class="modal-footer")
@@ -45,10 +45,13 @@ block content
                 | Typing ur comment:
               a.btn.btn-default(id="postbtn", href="javascript: uploadPost();") Send
 
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+    script( src="/socket.io/socket.io.js" )
     script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
     script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
     script( src='/javascripts/global.js')
 
+//    <form action="" onsubmit="javascript:sendMessage();return false;">
 //extends layout
 //block content
 //  h1= title

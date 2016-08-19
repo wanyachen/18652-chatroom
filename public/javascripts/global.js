@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 //	if (bodyid == 'main') {
 		//login button callback
-		$('.container button').on('click', userLogin);
+//		$('.container button').on('click', userLogin);
 //	} else if (bodyid == "chat") {
 		//chatroom page
 //		console.log('in chatroom page, username = ' + curUser.username);	//for debug
@@ -44,8 +44,9 @@ $(document).ready(function() {
 });
 
 // ---------------------- callback functions ----------------------------
-function userLogin(event) {
-	event.preventDefault();
+//function userLogin(event) {
+function userLogin() {
+//	event.preventDefault();
 
 	//var curUser = {
 	curUser = {
