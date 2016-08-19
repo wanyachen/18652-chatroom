@@ -41,7 +41,9 @@ function userLogin(event) {
  	}).done(function( response ) {
 
     		if (response.msg === '') {
-	    		window.location.href = '/chatroom';	//redirect to chatroom page
+	    		//window.location.href = '/chatroom';	//redirect to chatroom page
+			//modal.show
+			$('#myModal').modal('show');
 
 		} else {
 			//sth goes wrong
@@ -77,11 +79,12 @@ function uploadPost() {
     //for debug
     console.log('uploadPost is triggered...');
 
+//        url: '/chatroom/upload',
     //get username from server ??
     $.ajax({
         type: 'POST',
         data: newPost,
-        url: '/chatroom/upload',
+        url: '/users/upload',	//modal
         dataType: 'JSON',
 	statusCode : {
 		500: function(response) {

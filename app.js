@@ -8,7 +8,7 @@ var session = require('express-session');	//manage login session
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var chatroom = require('./routes/chatroom');	//customized route
+//var chatroom = require('./routes/chatroom');	//customized route	//commented
 var logout = require('./routes/logout');	//customized route
 
 // Database support:
@@ -41,7 +41,7 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
 app.use('/users', users);
-app.use('/chatroom', chatroom);	//chatroom page
+//app.use('/chatroom', chatroom);	//chatroom page	//commented
 app.use('/logout', logout);	//exit link
 
 // catch 404 and forward to error handler
