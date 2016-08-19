@@ -18,6 +18,12 @@ $(document).ready(function() {
 		//    window.location.href = '/';	//relative ?
 		//});
 //	}
+
+	//render old posts
+	$('#myModal').on('shown.bs.modal', function (e) {
+		// do something...
+		getAllPosts();
+	});
 		$('#logout').on('click', userLogout);
 });
 
@@ -108,6 +114,29 @@ function uploadPost() {
 }
 
 // ---------------------- helper functions ----------------------------
+// render old posts
+function getAllPosts() {
+	
+    // Empty content string
+    var tableContent = '';
+//    console.log("getAllPosts ... ");
+
+    // jQuery AJAX call for JSON
+    $.getJSON( '/users/postlist', function( data ) {
+
+    	// For each item in our JSON, add a table row and cells to the content string
+    	$.each(data, function(){
+    	    //for debug
+    	    console.log("user = " + this.username);
+    	    console.log("timestamp = " + this.timestamp);
+    	    console.log("content = " + this.content);
+    	    renderPost(this.username, this.timestamp, this.content);
+
+    	});
+	
+    });
+};
+
 function renderPost(username, timestamp, content) {
 
     //for debug
@@ -138,7 +167,8 @@ function renderPost(username, timestamp, content) {
     layout += '  <div class="col-md-4"></div>\n';
     layout += '</div>\n';
     //$('div#msg').html(layout);
-    $('div#msg').prepend(layout);
+    //$('div#msg').prepend(layout);
+    $('div#msg').append(layout);
 
 }
 

@@ -42,5 +42,17 @@ router.post('/upload', function(req, res) {
     });
 });
 
+//global.js request for all posts
+router.get('/postlist', function(req, res) {
+    var db = req.db;
+    var collection = db.get('postlist');
+
+    //for debug
+//    console.log("arrive at /page/postlist");
+
+    collection.find({},{},function(e,docs){
+        res.json(docs);	//send to global.js
+    });
+});
 
 module.exports = router;
