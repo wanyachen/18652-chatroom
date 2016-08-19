@@ -2,14 +2,14 @@
 var curUser = {};	//global
 
 $(document).ready(function() {
-	var bodyid = $('body').attr('id');
+//	var bodyid = $('body').attr('id');
 
-	if (bodyid == 'main') {
+//	if (bodyid == 'main') {
 		//login button callback
 		$('.container button').on('click', userLogin);
-	} else if (bodyid == "chat") {
+//	} else if (bodyid == "chat") {
 		//chatroom page
-		console.log('in chatroom page, username = ' + curUser.username);	//for debug
+//		console.log('in chatroom page, username = ' + curUser.username);	//for debug
 
 		//button callback
     		//$('#postbtn').on('click', uploadPost);	//in chatroom.jade
@@ -17,7 +17,8 @@ $(document).ready(function() {
 		//    console.log('logout link is clicked');
 		//    window.location.href = '/';	//relative ?
 		//});
-	}
+//	}
+		$('#logout').on('click', userLogout);
 });
 
 // ---------------------- callback functions ----------------------------
@@ -50,6 +51,12 @@ function userLogin(event) {
     	    		alert('Error: ' + response.msg);
 		}
  	});
+}
+
+function userLogout(event) {
+	event.preventDefault();
+
+	window.location.href = '/logout';	//redirect to logout page
 }
 
 // Upload post
