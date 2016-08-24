@@ -12,10 +12,35 @@ var users = require('./routes/users');
 var logout = require('./routes/logout');	//customized route
 
 // Database support:
-// store messages
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/chatroom');
+//// store messages
+//var mongo = require('mongodb');
+//var monk = require('monk');
+//var db = monk('localhost:27017/chatroom');
+//mongoose +++
+var dbUrl = process.env.MONGOHQ_URL || 'mongodb://localhost:27017/chatroom';
+var mongoose = require('mongoose');
+var connection = mongoose.createConnection(dbUrl);
+connection.on('error', console.error.bind(console, 'connection error:'));
+
+connection.once('open', function callback() {
+	console.info('connected to database');
+});
+//var models = require('./models');
+//var userSchema = new mongoose.Schema({username: 'string'}, {collection: 'userlist'});
+var userSchema = new mongoose.Schema({username: 'string'});
+var Users = mongoose.model('User', userSchema);
+//var postSchema = new mongoose.Schema({username: 'string', timestamp: 'string', content: 'string'}, {collection: 'postlist'});
+var postSchema = new mongoose.Schema({username: 'string', timestamp: 'string', content: 'string'});
+var Posts = mongoose.model('Post', postSchema);
+
+//function db(req, res, next) {
+//	req.db = {
+//		User: connection.model('User', models.User, 'users'),
+//		Post: connection.model('Post', models.Post, 'posts')
+//	};
+//	return next();
+//}
+//mongoose ---
 
 var app = express();
 //socket +++
@@ -37,10 +62,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // important!
 // Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
+//app.use(function(req,res,next){
+//    req.db = db;
+//    next();
+//});
+//mongoose +++
+app.use(function (req, res, next) {
+	req.db = {
+		User: connection.model('User', /*models.User*/Users, 'users'),
+		Post: connection.model('Post', /*models.Post*/Posts, 'posts')
+	};
+	next();
 });
+//mongoose ---
 
 //routers
 app.use(session({secret: 'thisisahomeworkof18652'}));	//manage login session
@@ -118,5 +152,15 @@ io.on('connection', function(socket) {
 });
 //socket ---
 
+//mongoose +++
+var exitFunc = function() {
+	mongoose.connection.close(function() {
+		console.log('node js exit');
+		process.exit(0);
+	});
+}
+process.on('exit', exitFunc);
+process.on('SIGINT', exitFunc);
+//mongoose ---
 
 module.exports = app;

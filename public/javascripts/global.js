@@ -130,6 +130,8 @@ function uploadPost() {
 		//delay post, until receive broadcast socket
 	},
     });
+    //clean up
+    $('#comment').val('');
  
 }
 
