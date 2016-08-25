@@ -9,11 +9,20 @@ function sendFunction(data) {
      socket.emit('new message', data);
 }
 // 'chat message' is for the id of the socket and $('#new-area') is for the text area
-socket.on('chat message', function(msg){
-     //$('#messages-area').append($('<li>').text(msg));
-     console.log('client socket get ACK');
-     //receive broadcast, renderPost
-     renderPost(msg.username, msg.timestamp, msg.content);	//update content here
+socket.on ('connect', function() {
+
+	//clean up
+	console.log('client side socket is connected');
+//	socket.sendBuffer=[];
+
+	socket.on('chat message', function(msg){
+	     //$('#messages-area').append($('<li>').text(msg));
+	     console.log('client socket get ACK');
+	     if (!jQuery.isEmptyObject(curUser)) {
+	     	//receive broadcast, renderPost
+	     	renderPost(msg.username, msg.timestamp, msg.content);	//update content here
+	     }
+	});
 });
 
 
@@ -39,6 +48,21 @@ $(document).ready(function() {
 	$('#myModal').on('shown.bs.modal', function (e) {
 		// do something...
 		getAllPosts();
+
+//		//for debug
+//		socket.on ('connect', function() {
+//		
+//			//clean up
+//			console.log('client side socket is connected');
+//			socket.sendBuffer=[];
+//		
+//			socket.on('chat message', function(msg){
+//			     //$('#messages-area').append($('<li>').text(msg));
+//			     console.log('client socket get ACK');
+//			     //receive broadcast, renderPost
+//			     renderPost(msg.username, msg.timestamp, msg.content);	//update content here
+//			});
+//		});
 	});
 		$('#logout').on('click', userLogout);
 });
@@ -79,6 +103,7 @@ function userLogin() {
 function userLogout(event) {
 	event.preventDefault();
 
+	curUser = {};	//clean up
 	window.location.href = '/logout';	//redirect to logout page
 }
 

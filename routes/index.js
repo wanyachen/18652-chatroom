@@ -18,7 +18,9 @@ module.exports = function(io) {
 		console.log('[user.js] user connected');
 		
 		socket.on('new message', function(msg) {
-			console.log('message: ' + msg);
+			//console.log('message: ' + msg);
+			console.log('message: ' + msg.content);
+//			msg.content += '[this is from socket.io]';	//for debug
 			io.emit('chat message', msg);	//broadcast
 		});
 	

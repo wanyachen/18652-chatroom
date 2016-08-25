@@ -40,7 +40,8 @@ router.post('/upload', function(req, res) {
 //mongoose---    var collection = db.get('postlist');
     //req.body : JSON data
     //{username, timestamp, content}
-    req.body.username = req.session.username;	//update ??
+    console.log('/upload : session.username = ' + /*req.session.username*/sess.username);	//for debug
+    req.body.username = /*req.session.username*/sess.username;	//update ??
 //    collection.insert(req.body, function(err, result){
 //	//heyq, send username to client
 //	if (err === null) {
