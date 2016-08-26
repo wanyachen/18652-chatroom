@@ -18,7 +18,7 @@ block content
       .row
         div(class="container")
           .col-md-4
-            form(class="form-signin", action="", onsubmit="javascript:userLogin();return false;")
+            form(class="form-signin", action="", onsubmit="javascript:myApp.userLogin();return false;")
               .form-group
                 h2(class="form-signin-heading")
                   | Please sign in
@@ -43,7 +43,7 @@ block content
             div(class="form-group")
               textarea(class="form-control", id="comment")
                 | Typing ur comment:
-              a.btn.btn-default(id="postbtn", href="javascript: uploadPost();") Send
+              a.btn.btn-default(id="postbtn", href="javascript:myApp.uploadPost();") Send
 
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
     script( src="/socket.io/socket.io.js" )
@@ -51,28 +51,3 @@ block content
     script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
     script( src='/javascripts/global.js')
 
-//    <form action="" onsubmit="javascript:sendMessage();return false;">
-//extends layout
-//block content
-//  h1= title
-//  p Welcome to #{title}
-//  body(id="main")
-//    h2 Login Form
-//    form(name="lform", method="post")
-//      div(class="container")
-//        label
-//          strong Username
-//        input(type="text", placeholder="Enter Username", name="uname", required)
-//        button(type="submit")
-//          | Login
-
-//    <div class="container">
-//    <label><b>Username</b></label>
-//    <input type="text" placeholder="Enter Username" name="uname" required>
-//
-//    <label><b>Password</b></label>
-//    <input type="password" placeholder="Enter Password" name="psw" required>
-//        
-//    <button type="submit">Login</button>
-//    <input type="checkbox" checked="checked"> Remember me
-//  </div>

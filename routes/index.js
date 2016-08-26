@@ -1,7 +1,6 @@
 module.exports = function(io) {
 	var express = require('express');
 	var router = express.Router();
-//	var sess;	//global, manage login session
 	
 	/* GET home page. */
 	router.get('/', function(req, res, next) {
